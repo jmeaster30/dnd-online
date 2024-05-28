@@ -4,7 +4,7 @@ defmodule DndOnline.Application do
 
   def start(_type, _args) do
     children = [
-      {Plug.Cowboy, scheme: :http, plug: DndOnline.HelloWorldPlug, options: [port: 8080]}
+      {Plug.Cowboy, scheme: :http, plug: DndOnline.Routers.Router, options: [port: 8080]}
     ]
 
     opts = [strategy: :one_for_one, name: DndOnline.Supervisor]
