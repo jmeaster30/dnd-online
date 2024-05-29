@@ -1,5 +1,7 @@
 defmodule DndOnline.Routers.Router do
   use Plug.Router
+  use Plug.ErrorHandler
+  require Logger
 
   plug Plug.Static, at: "/", from: :dnd_online
   plug :match
@@ -13,8 +15,15 @@ defmodule DndOnline.Routers.Router do
     |> send_file(200, "priv/static/index.html")
   end
 
-  match _ do
-    send_resp(conn, 404, ":(")
+  match "*path" do
+    _ = conn
+    raise DndOnline.Exceptions.NotFound, message: "'#{inspect path}' not found"
   end
 
+  defp handle_errors(conn, %{kind: kind, reason: reason, stack: stack}) do
+    IO.inspect(kind, label: :kind)
+    IO.inspect(reason, label: :reason)
+    IO.inspect(stack, label: :stack)
+    send_resp(conn, conn.status, "Something went wrong")
+  end
 end

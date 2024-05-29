@@ -23,6 +23,8 @@ defmodule DndOnline.MixProject do
   defp deps do
     [
       {:plug_cowboy, "~> 2.0"},
+      {:ecto_sql, "~> 3.2"},
+      {:postgrex, "~> 0.15"}
     ]
   end
 end
