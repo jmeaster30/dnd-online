@@ -1,8 +1,11 @@
 import Config
 
 config :dnd_online,
-  port: 3000,
+  port: 3000
+
+config :dnd_online, DndOnline.Database.Repo,
   database: "dnd_online_repo",
-  username: "postgres",
-  password: "",
-  hostname: "localhost"
+  username: "dev",
+  password: "password",
+  hostname: "localhost",
+  port: 5432
